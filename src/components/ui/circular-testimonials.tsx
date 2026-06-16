@@ -36,9 +36,9 @@ interface CircularTestimonialsProps {
 }
 
 function calculateGap(width: number) {
-  const minWidth = 1024;
+  const minWidth = 320;
   const maxWidth = 1456;
-  const minGap = 60;
+  const minGap = 20;
   const maxGap = 86;
   if (width <= minWidth) return minGap;
   if (width >= maxWidth)
@@ -157,8 +157,8 @@ export const CircularTestimonials = ({
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-10 rounded-[2rem]">
-      <div className="flex flex-col md:flex-row items-center gap-12">
+    <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-6 sm:py-10 rounded-2xl sm:rounded-[2rem]">
+      <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12">
         {/* Text on left */}
         <div className="flex-1 flex flex-col justify-between order-2 md:order-1">
           <AnimatePresence mode="wait">
@@ -170,13 +170,22 @@ export const CircularTestimonials = ({
               exit="exit"
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h3 className="font-bold mb-1" style={{ color: colorName, fontSize: fontSizeName }}>
+              <h3
+                className="font-bold mb-1 text-base sm:text-xl md:text-2xl"
+                style={{ color: colorName }}
+              >
                 {activeTestimonial.name}
               </h3>
-              <p className="mb-8" style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
+              <p
+                className="mb-6 sm:mb-8 text-xs sm:text-sm md:text-base"
+                style={{ color: colorDesignation }}
+              >
                 {activeTestimonial.designation}
               </p>
-              <motion.p className="leading-relaxed" style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
+              <motion.p
+                className="leading-relaxed text-sm sm:text-base md:text-lg"
+                style={{ color: colorTestimony }}
+              >
                 {activeTestimonial.quote.split(" ").map((word, i) => (
                   <motion.span
                     key={i}
@@ -191,30 +200,30 @@ export const CircularTestimonials = ({
               </motion.p>
             </motion.div>
           </AnimatePresence>
-          <div className="flex gap-6 pt-8">
+          <div className="flex gap-4 sm:gap-6 pt-6 sm:pt-8">
             <button
-              className="w-11 h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg }}
               onClick={handlePrev}
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
             >
-              <FaArrowLeft size={28} color={colorArrowFg} />
+              <FaArrowLeft size={20} color={colorArrowFg} />
             </button>
             <button
-              className="w-11 h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg }}
               onClick={handleNext}
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
             >
-              <FaArrowRight size={28} color={colorArrowFg} />
+              <FaArrowRight size={20} color={colorArrowFg} />
             </button>
           </div>
         </div>
 
         {/* Image on right with curves */}
-        <div className="flex-1 order-1 md:order-2 relative w-full h-80 md:h-[26rem] overflow-hidden rounded-[2rem]" ref={imageContainerRef}>
+        <div className="flex-1 order-1 md:order-2 relative w-full h-60 sm:h-72 md:h-[26rem] overflow-hidden rounded-2xl sm:rounded-[2rem]" ref={imageContainerRef}>
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -227,7 +236,7 @@ export const CircularTestimonials = ({
               <img
                 src={activeTestimonial.src}
                 alt={activeTestimonial.name}
-                className="w-full h-full object-cover rounded-[2rem]"
+                className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem]"
               />
             </motion.div>
           </AnimatePresence>

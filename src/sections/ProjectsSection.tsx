@@ -8,21 +8,21 @@ export function ProjectsSection() {
   return (
     <section
       id={SECTION_IDS.WORK}
-      className="projects-section min-h-screen flex items-center px-6 md:px-12 py-32"
+      className="projects-section min-h-screen flex items-center px-4 sm:px-6 md:px-12 py-20 sm:py-32"
     >
       <div className="max-w-[1400px] mx-auto w-full">
-        <div className="reveal flex items-end justify-between flex-wrap gap-4 mb-16">
+        <div className="reveal flex items-end justify-between flex-wrap gap-4 mb-10 sm:mb-16">
           <div>
-            <div className="text-xs uppercase tracking-[0.3em] text-foreground/50 mb-4">
+            <div className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-foreground/50 mb-3 sm:mb-4">
               {SECTION_LABELS.SELECTED_WORK}
             </div>
-            <h2 className="font-display text-5xl md:text-7xl tracking-[-0.02em]">
+            <h2 className="font-display text-3xl sm:text-5xl md:text-7xl tracking-[-0.02em]">
               {projects.heading}
             </h2>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
           {projects.items.map((project) => (
             <div key={project.id} className={`project-card ${project.className ?? ""}`}>
               <CardContainer className="inter-var w-full">
@@ -50,12 +50,12 @@ export function ProjectsSection() {
                       )}
                     </div>
                   </CardItem>
-                  <div className="mt-4 flex items-start justify-between gap-4 px-1">
+                  <div className="mt-3 sm:mt-4 flex items-start justify-between gap-3 sm:gap-4 px-1">
                     <CardItem translateZ="50">
-                      <div className="text-[10px] uppercase tracking-[0.25em] text-foreground/50 mb-1">
+                      <div className="text-[8px] sm:text-[10px] uppercase tracking-[0.25em] text-foreground/50 mb-1">
                         {project.category}
                       </div>
-                      <h3 className="font-display text-lg md:text-xl tracking-tight">
+                      <h3 className="font-display text-base sm:text-lg md:text-xl tracking-tight">
                         {project.title}
                         {project.subtitle && (
                           <span className="block italic text-foreground/70">
@@ -67,7 +67,7 @@ export function ProjectsSection() {
                     <CardItem
                       translateZ="40"
                       as="span"
-                      className="text-[10px] text-foreground/50 shrink-0 pt-1"
+                      className="text-[8px] sm:text-[10px] text-foreground/50 shrink-0 pt-1"
                     >
                       {project.year}
                     </CardItem>

@@ -63,6 +63,7 @@ export const CircularTestimonials = ({
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const [isTablet, setIsTablet] = useState(false);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -72,6 +73,11 @@ export const CircularTestimonials = ({
     () => testimonials[activeIndex],
     [activeIndex, testimonials]
   );
+
+  useEffect(() => {
+    const w = window.innerWidth;
+    setIsTablet(w >= 640 && w < 1024);
+  }, []);
 
   useEffect(() => {
     function handleResize() {
@@ -146,22 +152,31 @@ export const CircularTestimonials = ({
               >
                 {activeTestimonial.designation}
               </p>
-              <motion.p
-                className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
-                style={{ color: colorTestimony }}
-              >
-                {activeTestimonial.quote.split(" ").map((word, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ filter: "blur(8px)", opacity: 0, y: 3 }}
-                    animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, ease: "easeInOut", delay: 0.02 * i }}
-                    style={{ display: "inline-block" }}
-                  >
-                    {word}&nbsp;
-                  </motion.span>
-                ))}
-              </motion.p>
+              {isTablet ? (
+                <p
+                  className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
+                  style={{ color: colorTestimony }}
+                >
+                  {activeTestimonial.quote}
+                </p>
+              ) : (
+                <motion.p
+                  className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
+                  style={{ color: colorTestimony }}
+                >
+                  {activeTestimonial.quote.split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ filter: "blur(8px)", opacity: 0, y: 3 }}
+                      animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut", delay: 0.02 * i }}
+                      style={{ display: "inline-block" }}
+                    >
+                      {word}&nbsp;
+                    </motion.span>
+                  ))}
+                </motion.p>
+              )}
             </motion.div>
           </AnimatePresence>
           <div className="flex gap-3 sm:gap-4 md:gap-6 pt-3 sm:pt-5 md:pt-8">

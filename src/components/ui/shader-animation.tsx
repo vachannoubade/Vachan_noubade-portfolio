@@ -17,7 +17,10 @@ export function ShaderAnimation() {
     if (!containerRef.current) return
 
     const container = containerRef.current
-    const isMobile = window.innerWidth < 640
+    const w = window.innerWidth
+    const isSmall = w < 640
+    const isTablet = w >= 640 && w < 1024
+    const useLite = isSmall || isTablet
 
     const vertexShader = `
       void main() {
@@ -25,7 +28,7 @@ export function ShaderAnimation() {
       }
     `
 
-    const fragmentShader = isMobile ? `
+    const fragmentShader = useLite ? `
       precision highp float;
       uniform vec2 resolution;
       uniform float time;
@@ -88,8 +91,8 @@ export function ShaderAnimation() {
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile })
-    renderer.setPixelRatio(isMobile ? 1 : window.devicePixelRatio)
+    const renderer = new THREE.WebGLRenderer({ antialias: false })
+    renderer.setPixelRatio(1)
 
     container.appendChild(renderer.domElement)
 

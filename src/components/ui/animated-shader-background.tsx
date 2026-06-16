@@ -8,17 +8,19 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     const container = containerRef.current;
     if (!container) return;
 
-    const isMobile = window.innerWidth < 640;
+    const w = window.innerWidth;
+    const isSmall = w < 640;
+    const isTablet = w >= 640 && w < 1024;
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(1);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    const fragmentShader = isMobile ? `
+    const fragmentShader = (isSmall || isTablet) ? `
       precision highp float;
       uniform float iTime;
       uniform vec2 iResolution;
@@ -120,10 +122,10 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     animate();
 
     const handleResize = () => {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      renderer.setSize(w, h);
-      material.uniforms.iResolution.value.set(w, h);
+      const rw = container.clientWidth;
+      const rh = container.clientHeight;
+      renderer.setSize(rw, rh);
+      material.uniforms.iResolution.value.set(rw, rh);
     };
     window.addEventListener('resize', handleResize);
 

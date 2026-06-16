@@ -230,13 +230,28 @@
   }
 }
 
-/* Tablet: slower animations for smoother feel */
+/* Tablet: disable ALL heavy animations for smooth scrolling */
 @media (min-width: 641px) and (max-width: 1024px) {
   .hero-float {
-    animation-duration: 10s;
+    animation: none;
   }
   .pulse-glow {
-    animation-duration: 6s;
+    animation: none;
+  }
+  .shimmer-gradient {
+    animation-duration: 40s;
+  }
+  .pill:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  /* Disable aurora animation on tablet */
+  .animate-aurora {
+    animation: none;
+  }
+  /* Reduce noise overlay opacity */
+  .noise-overlay {
+    opacity: 0.02;
   }
 }
 

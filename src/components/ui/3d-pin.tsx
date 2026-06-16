@@ -19,9 +19,12 @@ export const PinContainer = ({
 }>) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isTouch, setIsTouch] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
+    const w = window.innerWidth;
     setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    setIsTablet(w >= 640 && w < 1024);
   }, []);
 
   const mouseX = useMotionValue(0);
@@ -48,8 +51,10 @@ export const PinContainer = ({
       `linear-gradient(${135 + ry * 1.5}deg, rgba(255,255,255,${Math.max(0, 0.03 + Math.abs(rx) * 0.006)}) 0%, transparent 55%)`
   );
 
+  const skipEffects = isTouch || isTablet;
+
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!ref.current || isTouch) return;
+    if (!ref.current || skipEffects) return;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     mouseX.set((e.clientX - left - width / 2) / width);
     mouseY.set((e.clientY - top - height / 2) / height);
@@ -68,10 +73,10 @@ export const PinContainer = ({
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={!isTouch ? { rotateX, rotateY, transformStyle: "preserve-3d" } : undefined}
+        style={!skipEffects ? { rotateX, rotateY, transformStyle: "preserve-3d" } : undefined}
         className={cn("relative group cursor-pointer select-none", className)}
       >
-        {!isTouch && (
+        {!skipEffects && (
           <motion.div
             className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             style={{ background: glowBg }}
@@ -84,7 +89,7 @@ export const PinContainer = ({
             "shadow-sm group-hover:shadow-2xl transition-shadow duration-500"
           )}
         >
-          {!isTouch && (
+          {!skipEffects && (
             <motion.div
               className="absolute inset-0 rounded-2xl pointer-events-none"
               style={{ background: sheenBg }}

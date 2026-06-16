@@ -52,7 +52,7 @@ export function HeroSection() {
 
           {/* Hero image with 3D Pin - visible on all screens */}
           <div className="sm:col-span-5">
-            <PinContainer title="Portfolio · 2026" className="w-full max-w-[180px] sm:max-w-sm md:max-w-md ml-auto">
+            <PinContainer title="Portfolio · 2026" className="w-full max-w-[200px] sm:max-w-sm md:max-w-md mx-auto sm:ml-auto sm:mr-0">
               <div className="relative aspect-[4/5] w-full hero-float">
                 <div className="absolute -inset-3 sm:-inset-4 md:-inset-6 bg-foreground/5 rounded-[1.5rem] sm:rounded-[2rem] blur-xl sm:blur-2xl" />
                 <div className="absolute inset-0 rounded-[1.25rem] sm:rounded-[1.75rem] overflow-hidden bg-foreground/5 shadow-[var(--shadow-glow)]">

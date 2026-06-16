@@ -5,7 +5,7 @@ export function CTASection() {
   const { cta } = portfolioData;
 
   return (
-    <section className="cta-section relative min-h-[30vh] sm:min-h-[60vh] md:min-h-[80vh] flex items-center px-4 py-12 sm:px-6 sm:py-20 md:px-12 md:py-32 overflow-hidden">
+    <section className="cta-section relative min-h-[30vh] sm:min-h-[50vh] md:min-h-[80vh] flex items-center px-4 py-10 sm:px-6 sm:py-16 md:px-12 md:py-32 overflow-hidden">
       <div className="absolute inset-0 shimmer-gradient -z-10" />
       <div className="noise-overlay -z-10" />
       <div className="absolute top-1/3 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-[#B2D5E5] rounded-full blur-[80px] sm:blur-[120px] md:blur-[180px] opacity-15 pulse-glow" />

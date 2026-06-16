@@ -3,7 +3,7 @@
 // @ts-nocheck
 import { cn } from "@/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 export const PinContainer = ({
   children,
@@ -18,6 +18,11 @@ export const PinContainer = ({
   containerClassName?: string;
 }>) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -44,7 +49,7 @@ export const PinContainer = ({
   );
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!ref.current) return;
+    if (!ref.current || isTouch) return;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     mouseX.set((e.clientX - left - width / 2) / width);
     mouseY.set((e.clientY - top - height / 2) / height);
@@ -63,13 +68,15 @@ export const PinContainer = ({
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        style={!isTouch ? { rotateX, rotateY, transformStyle: "preserve-3d" } : undefined}
         className={cn("relative group cursor-pointer select-none", className)}
       >
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ background: glowBg }}
-        />
+        {!isTouch && (
+          <motion.div
+            className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{ background: glowBg }}
+          />
+        )}
         <div
           className={cn(
             "relative rounded-2xl overflow-hidden",
@@ -77,10 +84,12 @@ export const PinContainer = ({
             "shadow-sm group-hover:shadow-2xl transition-shadow duration-500"
           )}
         >
-          <motion.div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{ background: sheenBg }}
-          />
+          {!isTouch && (
+            <motion.div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{ background: sheenBg }}
+            />
+          )}
           {children}
         </div>
         {title && (

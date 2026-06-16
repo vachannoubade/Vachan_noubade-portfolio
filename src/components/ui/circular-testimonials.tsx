@@ -121,8 +121,8 @@ export const CircularTestimonials = ({
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-3 sm:px-3 md:px-4 py-3 sm:py-6 md:py-10 rounded-xl sm:rounded-2xl md:rounded-[2rem]">
-      <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-12">
+    <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 md:px-4 py-3 sm:py-6 md:py-10 rounded-xl sm:rounded-2xl md:rounded-[2rem]">
+      <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 md:gap-12">
         {/* Text on left */}
         <div className="flex-1 flex flex-col justify-between order-2 md:order-1 w-full">
           <AnimatePresence mode="wait">
@@ -135,13 +135,13 @@ export const CircularTestimonials = ({
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <h3
-                className="font-bold mb-0.5 sm:mb-1 text-sm sm:text-base md:text-xl lg:text-2xl"
+                className="font-bold mb-0.5 sm:mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl"
                 style={{ color: colorName }}
               >
                 {activeTestimonial.name}
               </h3>
               <p
-                className="mb-3 sm:mb-5 md:mb-8 text-[11px] sm:text-xs md:text-sm lg:text-base"
+                className="mb-3 sm:mb-5 md:mb-8 text-[11px] sm:text-sm md:text-sm lg:text-base"
                 style={{ color: colorDesignation }}
               >
                 {activeTestimonial.designation}
@@ -166,7 +166,7 @@ export const CircularTestimonials = ({
           </AnimatePresence>
           <div className="flex gap-3 sm:gap-4 md:gap-6 pt-3 sm:pt-5 md:pt-8">
             <button
-              className="w-9 h-9 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg }}
               onClick={handlePrev}
               onMouseEnter={() => setHoverPrev(true)}
@@ -175,7 +175,7 @@ export const CircularTestimonials = ({
               <FaArrowLeft size={16} color={colorArrowFg} />
             </button>
             <button
-              className="w-9 h-9 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg }}
               onClick={handleNext}
               onMouseEnter={() => setHoverNext(true)}
@@ -188,7 +188,7 @@ export const CircularTestimonials = ({
 
         {/* Image on right with curves */}
         <div
-          className="flex-1 order-1 md:order-2 relative w-full h-44 sm:h-56 md:h-[26rem] overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[2rem]"
+          className="flex-1 order-1 md:order-2 relative w-full h-52 sm:h-64 md:h-[26rem] overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[2rem]"
           ref={imageContainerRef}
         >
           <AnimatePresence mode="wait">

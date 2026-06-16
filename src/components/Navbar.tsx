@@ -30,8 +30,8 @@ export function Navbar({ activeSection }: NavbarProps) {
           Sea&nbsp;Fronk<span style={{ opacity: 0.4 }}>.</span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
+        {/* Desktop nav - shown on tablet and up */}
+        <nav className="hidden sm:flex items-center gap-6 md:gap-8 text-sm">
           {nav.map((item) => (
             <a
               key={item.id}
@@ -48,15 +48,15 @@ export function Navbar({ activeSection }: NavbarProps) {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden sm:block">
           <GlassEffect href="#contact" className="rounded-full px-4 py-2">
             <span className="text-sm" style={{ color: COLORS.TEXT }}>Let's talk</span>
           </GlassEffect>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger - only below 640px */}
         <button
-          className="md:hidden relative w-10 h-10 flex items-center justify-center"
+          className="sm:hidden relative w-10 h-10 flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           style={{ zIndex: 110 }}
@@ -82,9 +82,9 @@ export function Navbar({ activeSection }: NavbarProps) {
         </button>
       </header>
 
-      {/* Mobile menu overlay - portal-like at body level */}
+      {/* Mobile menu overlay - only below 640px */}
       <div
-        className={`md:hidden fixed inset-0 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
+        className={`sm:hidden fixed inset-0 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"

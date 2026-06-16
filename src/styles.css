@@ -213,7 +213,7 @@
 }
 @utility animate-aurora { animation: aurora 20s ease-in-out infinite; }
 
-/* Mobile performance optimizations */
+/* Mobile: disable heavy animations */
 @media (max-width: 640px) {
   .hero-float {
     animation: none;
@@ -227,6 +227,16 @@
   .pill:hover {
     transform: none;
     box-shadow: none;
+  }
+}
+
+/* Tablet: slower animations for smoother feel */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-float {
+    animation-duration: 10s;
+  }
+  .pulse-glow {
+    animation-duration: 6s;
   }
 }
 

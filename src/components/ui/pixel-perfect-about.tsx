@@ -215,7 +215,7 @@ export function PixelPerfectAbout({
   }, []);
 
   return (
-    <div className="relative w-full min-h-[40dvh] sm:min-h-[70dvh] md:min-h-[80dvh] flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden select-none isolate">
+    <div className="relative w-full min-h-[40dvh] sm:min-h-[60dvh] md:min-h-[80dvh] flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden select-none isolate">
       <style>{`
         @keyframes about-shimmer {
           0% { background-position: 200% center; }
@@ -233,8 +233,8 @@ export function PixelPerfectAbout({
         }
         @media (max-width: 640px) {
           .about-glass-text {
-            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
-            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.15);
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
           }
         }
       `}</style>
@@ -246,10 +246,10 @@ export function PixelPerfectAbout({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center py-8 sm:py-16 md:py-20">
-        <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-3 sm:mb-6 md:mb-8">— About —</div>
+      <div className="relative z-10 flex flex-col items-center justify-center text-center py-8 sm:py-12 md:py-20">
+        <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-3 sm:mb-5 md:mb-8">— About —</div>
 
-        <h2 className="about-glass-text font-display font-medium leading-[0.92] sm:leading-[0.95] text-[clamp(1.8rem,8vw,7rem)] mb-3 sm:mb-6 md:mb-8">
+        <h2 className="about-glass-text font-display font-medium leading-[0.92] sm:leading-[0.95] text-[clamp(1.8rem,8vw,7rem)] mb-3 sm:mb-5 md:mb-8">
           <span className="block">{word1}</span>
           <span className="block">{word2}</span>
         </h2>

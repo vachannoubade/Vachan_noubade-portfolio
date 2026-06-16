@@ -8,34 +8,34 @@ export function GallerySection() {
   return (
     <section
       id={SECTION_IDS.GALLERY}
-      className="gallery-section min-h-screen px-4 sm:px-6 md:px-12 py-20 sm:py-32 relative"
+      className="gallery-section min-h-screen px-4 py-16 sm:px-6 sm:py-20 md:px-12 md:py-32 relative"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="reveal flex items-end justify-between flex-wrap gap-4 mb-10 sm:mb-16">
+        <div className="reveal flex items-end justify-between flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-16">
           <div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-foreground/50 mb-3 sm:mb-4">
+            <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-2 sm:mb-3 md:mb-4">
               {SECTION_LABELS.STUDIO_FEED}
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl md:text-7xl tracking-[-0.02em]">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-7xl tracking-[-0.02em]">
               {gallery.heading}
             </h2>
           </div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
+          <div className="flex flex-row sm:flex-row items-center gap-3 sm:gap-4 md:gap-6">
             <a
               href={gallery.instagramUrl}
               target="_blank"
               rel="noreferrer"
-              className="link-underline text-xs sm:text-sm"
+              className="link-underline text-[11px] sm:text-xs md:text-sm"
             >
-              Follow on Instagram →
+              Instagram →
             </a>
             <a
               href={gallery.youtubeUrl}
               target="_blank"
               rel="noreferrer"
-              className="link-underline text-xs sm:text-sm"
+              className="link-underline text-[11px] sm:text-xs md:text-sm"
             >
-              Subscribe on YT →
+              YT →
             </a>
           </div>
         </div>

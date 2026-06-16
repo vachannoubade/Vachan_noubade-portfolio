@@ -17,6 +17,7 @@ export function ShaderAnimation() {
     if (!containerRef.current) return
 
     const container = containerRef.current
+    const isMobile = window.innerWidth < 640
 
     const vertexShader = `
       void main() {
@@ -24,7 +25,26 @@ export function ShaderAnimation() {
       }
     `
 
-    const fragmentShader = `
+    const fragmentShader = isMobile ? `
+      precision highp float;
+      uniform vec2 resolution;
+      uniform float time;
+
+      void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+        float t = time*0.03;
+        float lineWidth = 0.003;
+
+        vec3 color = vec3(0.0);
+        for(int j = 0; j < 3; j++){
+          for(int i=0; i < 3; i++){
+            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
+          }
+        }
+        
+        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
+      }
+    ` : `
       #define TWO_PI 6.2831853072
       #define PI 3.14159265359
 
@@ -68,8 +88,8 @@ export function ShaderAnimation() {
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
-    renderer.setPixelRatio(window.devicePixelRatio)
+    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile })
+    renderer.setPixelRatio(isMobile ? 1 : window.devicePixelRatio)
 
     container.appendChild(renderer.domElement)
 
@@ -146,11 +166,11 @@ export function SiteEntrance({ onComplete }: { onComplete: () => void }) {
     >
       <ShaderAnimation />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-6">
-          <p className="text-white/90 text-xl sm:text-3xl md:text-4xl tracking-tight animate-pulse" style={{ fontFamily: "'Open Sauce Sans', sans-serif" }}>
+        <div className="flex flex-col items-center gap-3 sm:gap-4 md:gap-6 px-4">
+          <p className="text-white/90 text-lg sm:text-2xl md:text-4xl tracking-tight animate-pulse" style={{ fontFamily: "'Open Sauce Sans', sans-serif" }}>
             Take a look of
           </p>
-          <p className="text-white text-5xl sm:text-7xl md:text-8xl tracking-tight animate-pulse" style={{ fontFamily: "'Peace Sans', sans-serif" }}>
+          <p className="text-white text-3xl sm:text-5xl md:text-8xl tracking-tight animate-pulse" style={{ fontFamily: "'Peace Sans', sans-serif" }}>
             SeaFronk
           </p>
         </div>

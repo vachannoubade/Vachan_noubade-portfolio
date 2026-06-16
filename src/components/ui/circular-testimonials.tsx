@@ -36,9 +36,9 @@ interface CircularTestimonialsProps {
 }
 
 function calculateGap(width: number) {
-  const minWidth = 320;
+  const minWidth = 280;
   const maxWidth = 1456;
-  const minGap = 20;
+  const minGap = 12;
   const maxGap = 86;
   if (width <= minWidth) return minGap;
   if (width >= maxWidth)
@@ -58,9 +58,6 @@ export const CircularTestimonials = ({
   const colorArrowBg = colors.arrowBackground ?? "#222";
   const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
   const colorArrowHoverBg = colors.arrowHoverBackground ?? "#B2D5E5";
-  const fontSizeName = fontSizes.name ?? "1.5rem";
-  const fontSizeDesignation = fontSizes.designation ?? "0.925rem";
-  const fontSizeQuote = fontSizes.quote ?? "1.125rem";
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverPrev, setHoverPrev] = useState(false);
@@ -117,50 +114,17 @@ export const CircularTestimonials = ({
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
 
-  function getImageStyle(index: number): React.CSSProperties {
-    const gap = calculateGap(containerWidth);
-    const maxStickUp = gap * 0.8;
-    const isActive = index === activeIndex;
-    const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index;
-    const isRight = (activeIndex + 1) % testimonialsLength === index;
-    if (isActive) {
-      return {
-        zIndex: 3, opacity: 1, pointerEvents: "auto",
-        transform: "translateX(0px) translateY(0px) scale(1) rotateY(0deg)",
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      };
-    }
-    if (isLeft) {
-      return {
-        zIndex: 2, opacity: 1, pointerEvents: "auto",
-        transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      };
-    }
-    if (isRight) {
-      return {
-        zIndex: 2, opacity: 1, pointerEvents: "auto",
-        transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      };
-    }
-    return {
-      zIndex: 1, opacity: 0, pointerEvents: "none",
-      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-    };
-  }
-
   const quoteVariants = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 15 },
     animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
+    exit: { opacity: 0, y: -15 },
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-6 sm:py-10 rounded-2xl sm:rounded-[2rem]">
-      <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12">
+    <div className="w-full max-w-5xl mx-auto px-1 sm:px-3 md:px-4 py-4 sm:py-6 md:py-10 rounded-xl sm:rounded-2xl md:rounded-[2rem]">
+      <div className="flex flex-col md:flex-row items-center gap-5 sm:gap-6 md:gap-12">
         {/* Text on left */}
-        <div className="flex-1 flex flex-col justify-between order-2 md:order-1">
+        <div className="flex-1 flex flex-col justify-between order-2 md:order-1 w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -171,27 +135,27 @@ export const CircularTestimonials = ({
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <h3
-                className="font-bold mb-1 text-base sm:text-xl md:text-2xl"
+                className="font-bold mb-0.5 sm:mb-1 text-sm sm:text-base md:text-xl lg:text-2xl"
                 style={{ color: colorName }}
               >
                 {activeTestimonial.name}
               </h3>
               <p
-                className="mb-6 sm:mb-8 text-xs sm:text-sm md:text-base"
+                className="mb-4 sm:mb-5 md:mb-8 text-[11px] sm:text-xs md:text-sm lg:text-base"
                 style={{ color: colorDesignation }}
               >
                 {activeTestimonial.designation}
               </p>
               <motion.p
-                className="leading-relaxed text-sm sm:text-base md:text-lg"
+                className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
                 style={{ color: colorTestimony }}
               >
                 {activeTestimonial.quote.split(" ").map((word, i) => (
                   <motion.span
                     key={i}
-                    initial={{ filter: "blur(10px)", opacity: 0, y: 5 }}
+                    initial={{ filter: "blur(8px)", opacity: 0, y: 3 }}
                     animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: "easeInOut", delay: 0.025 * i }}
+                    transition={{ duration: 0.2, ease: "easeInOut", delay: 0.02 * i }}
                     style={{ display: "inline-block" }}
                   >
                     {word}&nbsp;
@@ -200,43 +164,48 @@ export const CircularTestimonials = ({
               </motion.p>
             </motion.div>
           </AnimatePresence>
-          <div className="flex gap-4 sm:gap-6 pt-6 sm:pt-8">
+          <div className="flex gap-3 sm:gap-4 md:gap-6 pt-4 sm:pt-5 md:pt-8">
             <button
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg }}
               onClick={handlePrev}
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
             >
-              <FaArrowLeft size={20} color={colorArrowFg} />
+              <FaArrowLeft size={16} className="sm:hidden" color={colorArrowFg} />
+              <FaArrowLeft size={20} className="hidden sm:block" color={colorArrowFg} />
             </button>
             <button
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
+              className="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
               style={{ backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg }}
               onClick={handleNext}
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
             >
-              <FaArrowRight size={20} color={colorArrowFg} />
+              <FaArrowRight size={16} className="sm:hidden" color={colorArrowFg} />
+              <FaArrowRight size={20} className="hidden sm:block" color={colorArrowFg} />
             </button>
           </div>
         </div>
 
         {/* Image on right with curves */}
-        <div className="flex-1 order-1 md:order-2 relative w-full h-60 sm:h-72 md:h-[26rem] overflow-hidden rounded-2xl sm:rounded-[2rem]" ref={imageContainerRef}>
+        <div
+          className="flex-1 order-1 md:order-2 relative w-full h-48 sm:h-56 md:h-[26rem] overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[2rem]"
+          ref={imageContainerRef}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, scale: 0.95, rotateY: -10 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.95, rotateY: 10 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="w-full h-full"
             >
               <img
                 src={activeTestimonial.src}
                 alt={activeTestimonial.name}
-                className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem]"
+                className="w-full h-full object-cover rounded-xl sm:rounded-2xl md:rounded-[2rem]"
               />
             </motion.div>
           </AnimatePresence>

@@ -215,7 +215,7 @@ export function PixelPerfectAbout({
   }, []);
 
   return (
-    <div className="relative w-full min-h-[80dvh] flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden select-none isolate">
+    <div className="relative w-full min-h-[60dvh] sm:min-h-[70dvh] md:min-h-[80dvh] flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden select-none isolate">
       <style>{`
         @keyframes about-shimmer {
           0% { background-position: 200% center; }
@@ -240,15 +240,15 @@ export function PixelPerfectAbout({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center py-20">
-        <div className="text-xs uppercase tracking-[0.3em] text-foreground/50 mb-8">— About —</div>
+      <div className="relative z-10 flex flex-col items-center justify-center text-center py-12 sm:py-16 md:py-20">
+        <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-5 sm:mb-6 md:mb-8">— About —</div>
 
-        <h2 className="about-glass-text font-display font-medium leading-[0.95] text-[clamp(2.5rem,8vw,7rem)] mb-8">
+        <h2 className="about-glass-text font-display font-medium leading-[0.92] sm:leading-[0.95] text-[clamp(2rem,8vw,7rem)] mb-5 sm:mb-6 md:mb-8">
           <span className="block">{word1}</span>
           <span className="block">{word2}</span>
         </h2>
 
-        <p className="text-sm sm:text-lg md:text-xl font-light text-foreground/85 max-w-xl leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-lg lg:text-xl font-light text-foreground/85 max-w-xl leading-relaxed">
           {description}
         </p>
       </div>

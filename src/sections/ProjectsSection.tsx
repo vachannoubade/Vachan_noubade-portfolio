@@ -8,27 +8,27 @@ export function ProjectsSection() {
   return (
     <section
       id={SECTION_IDS.WORK}
-      className="projects-section min-h-screen flex items-center px-4 sm:px-6 md:px-12 py-20 sm:py-32"
+      className="projects-section min-h-screen flex items-center px-4 py-16 sm:px-6 sm:py-20 md:px-12 md:py-32"
     >
       <div className="max-w-[1400px] mx-auto w-full">
-        <div className="reveal flex items-end justify-between flex-wrap gap-4 mb-10 sm:mb-16">
+        <div className="reveal flex items-end justify-between flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-16">
           <div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-foreground/50 mb-3 sm:mb-4">
+            <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-2 sm:mb-3 md:mb-4">
               {SECTION_LABELS.SELECTED_WORK}
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl md:text-7xl tracking-[-0.02em]">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-7xl tracking-[-0.02em]">
               {projects.heading}
             </h2>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {projects.items.map((project) => (
             <div key={project.id} className={`project-card ${project.className ?? ""}`}>
               <CardContainer className="inter-var w-full">
-                <CardBody className="relative group/card bg-foreground/5 rounded-2xl p-0 border-transparent w-full h-auto">
+                <CardBody className="relative group/card bg-foreground/5 rounded-xl sm:rounded-2xl p-0 border-transparent w-full h-auto">
                   <CardItem translateZ="100" className="w-full">
-                    <div className="aspect-video rounded-2xl overflow-hidden">
+                    <div className="aspect-video rounded-xl sm:rounded-2xl overflow-hidden">
                       {project.type === "video" ? (
                         <video
                           src={project.mediaSrc}
@@ -50,15 +50,15 @@ export function ProjectsSection() {
                       )}
                     </div>
                   </CardItem>
-                  <div className="mt-3 sm:mt-4 flex items-start justify-between gap-3 sm:gap-4 px-1">
+                  <div className="mt-2.5 sm:mt-3 md:mt-4 flex items-start justify-between gap-2 sm:gap-3 md:gap-4 px-1">
                     <CardItem translateZ="50">
-                      <div className="text-[8px] sm:text-[10px] uppercase tracking-[0.25em] text-foreground/50 mb-1">
+                      <div className="text-[7px] sm:text-[8px] md:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-foreground/50 mb-0.5 sm:mb-1">
                         {project.category}
                       </div>
-                      <h3 className="font-display text-base sm:text-lg md:text-xl tracking-tight">
+                      <h3 className="font-display text-sm sm:text-base md:text-lg lg:text-xl tracking-tight">
                         {project.title}
                         {project.subtitle && (
-                          <span className="block italic text-foreground/70">
+                          <span className="block italic text-foreground/70 text-xs sm:text-sm md:text-base">
                             {project.subtitle}
                           </span>
                         )}
@@ -67,7 +67,7 @@ export function ProjectsSection() {
                     <CardItem
                       translateZ="40"
                       as="span"
-                      className="text-[8px] sm:text-[10px] text-foreground/50 shrink-0 pt-1"
+                      className="text-[7px] sm:text-[8px] md:text-[10px] text-foreground/50 shrink-0 pt-0.5 sm:pt-1"
                     >
                       {project.year}
                     </CardItem>

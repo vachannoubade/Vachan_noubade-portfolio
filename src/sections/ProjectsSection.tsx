@@ -8,21 +8,21 @@ export function ProjectsSection() {
   return (
     <section
       id={SECTION_IDS.WORK}
-      className="projects-section min-h-screen flex items-center px-4 py-16 sm:px-6 sm:py-20 md:px-12 md:py-32"
+      className="projects-section min-h-auto sm:min-h-screen flex items-center px-4 py-12 sm:px-6 sm:py-20 md:px-12 md:py-32"
     >
       <div className="max-w-[1400px] mx-auto w-full">
-        <div className="reveal flex items-end justify-between flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-16">
+        <div className="reveal flex items-end justify-between flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-10 md:mb-16">
           <div>
             <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-foreground/50 mb-2 sm:mb-3 md:mb-4">
               {SECTION_LABELS.SELECTED_WORK}
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-7xl tracking-[-0.02em]">
+            <h2 className="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl tracking-[-0.02em]">
               {projects.heading}
             </h2>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 gap-3 sm:gap-6 md:gap-8">
           {projects.items.map((project) => (
             <div key={project.id} className={`project-card ${project.className ?? ""}`}>
               <CardContainer className="inter-var w-full">
@@ -50,7 +50,7 @@ export function ProjectsSection() {
                       )}
                     </div>
                   </CardItem>
-                  <div className="mt-2.5 sm:mt-3 md:mt-4 flex items-start justify-between gap-2 sm:gap-3 md:gap-4 px-1">
+                  <div className="mt-2 sm:mt-3 md:mt-4 flex items-start justify-between gap-2 sm:gap-3 md:gap-4 px-1">
                     <CardItem translateZ="50">
                       <div className="text-[7px] sm:text-[8px] md:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-foreground/50 mb-0.5 sm:mb-1">
                         {project.category}

@@ -45,9 +45,7 @@
 
 :root {
   --radius: 1rem;
-  /* Dark background #020202 */
   --background: oklch(0.02 0.005 260);
-  /* Light blue accent #B2D5E5 */
   --foreground: oklch(0.87 0.04 240);
   --card: oklch(0.05 0.008 260);
   --card-foreground: oklch(0.87 0.04 240);
@@ -95,9 +93,7 @@
   }
   ::selection { background: var(--foreground); color: var(--background); }
   img, video, canvas {
-    will-change: transform;
     backface-visibility: hidden;
-    transform: translateZ(0);
   }
 }
 
@@ -129,7 +125,6 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   transition: transform 300ms cubic-bezier(.25,.1,.25,1), background-color 300ms, color 300ms, box-shadow 300ms;
-  will-change: transform;
   &:hover {
     background: var(--foreground);
     color: var(--background);
@@ -149,24 +144,16 @@
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 400ms cubic-bezier(.25,.1,.25,1);
-    will-change: transform;
   }
   &:hover::after { transform: scaleX(1); transform-origin: left; }
 }
 
 @utility card-lift {
   transition: transform 600ms cubic-bezier(.2,.8,.2,1), box-shadow 600ms cubic-bezier(.2,.8,.2,1);
-  will-change: transform;
   &:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-glow);
   }
-}
-
-/* GPU compositing for sections */
-section {
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Smooth scrollbar */
@@ -228,9 +215,6 @@ section {
 
 /* Mobile performance optimizations */
 @media (max-width: 640px) {
-  section {
-    will-change: auto;
-  }
   .hero-float {
     animation: none;
   }
@@ -239,6 +223,10 @@ section {
   }
   .shimmer-gradient {
     animation-duration: 30s;
+  }
+  .pill:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
 

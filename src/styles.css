@@ -213,38 +213,6 @@
 }
 @utility animate-aurora { animation: aurora 20s ease-in-out infinite; }
 
-/* Mobile: disable heavy animations that cause lag */
-@media (max-width: 640px) {
-  .hero-float {
-    animation: none;
-  }
-  .pulse-glow {
-    animation: none;
-  }
-  .shimmer-gradient {
-    animation: none;
-  }
-  .animate-aurora {
-    animation: none;
-  }
-}
-
-/* Tablet: disable heavy animations for smooth scrolling */
-@media (min-width: 641px) and (max-width: 1024px) {
-  .hero-float {
-    animation: none;
-  }
-  .pulse-glow {
-    animation: none;
-  }
-  .shimmer-gradient {
-    animation: none;
-  }
-  .animate-aurora {
-    animation: none;
-  }
-}
-
 :root {
   --white: rgba(255, 255, 255, 1);
   --black: rgba(0, 0, 0, 1);

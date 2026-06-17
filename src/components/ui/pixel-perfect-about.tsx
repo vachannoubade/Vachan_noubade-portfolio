@@ -238,14 +238,12 @@ export function PixelPerfectAbout({
         }
         @media (max-width: 640px) {
           .about-glass-text {
-            animation: none !important;
             -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.15);
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
           }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
           .about-glass-text {
-            animation: none !important;
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
             filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
           }

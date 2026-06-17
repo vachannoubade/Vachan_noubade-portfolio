@@ -19,13 +19,9 @@ export const PinContainer = ({
 }>) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isTouch, setIsTouch] = useState(false);
-  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
-    const w = window.innerWidth;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-    setIsReduced(w < 1024 || prefersReduced);
   }, []);
 
   const mouseX = useMotionValue(0);
@@ -52,7 +48,7 @@ export const PinContainer = ({
       `linear-gradient(${135 + ry * 1.5}deg, rgba(255,255,255,${Math.max(0, 0.03 + Math.abs(rx) * 0.006)}) 0%, transparent 55%)`
   );
 
-  const skipEffects = isTouch || isReduced;
+  const skipEffects = isTouch;
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     if (!ref.current || skipEffects) return;

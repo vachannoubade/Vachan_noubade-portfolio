@@ -25,16 +25,14 @@ export const CardContainer = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const [isReduced, setIsReduced] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
-    const w = window.innerWidth;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setIsReduced(w < 1024 || prefersReduced);
+    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || isReduced) return;
+    if (!containerRef.current || isTouch) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) / 25;

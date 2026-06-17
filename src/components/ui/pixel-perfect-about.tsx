@@ -250,13 +250,13 @@ export function PixelPerfectAbout({
         }
       `}</style>
 
-      {/* Pixel canvas background — skipped on mobile/tablet for performance */}
+      {/* Pixel canvas background — reduced on mobile/tablet */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {themeColors.length > 0 && !isReduced && (
+        {themeColors.length > 0 && (
           <PixelCanvas
             colors={themeColors}
-            gap={6}
-            speed={30}
+            gap={isReduced ? 12 : 6}
+            speed={isReduced ? 15 : 30}
           />
         )}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--background)_100%)] pointer-events-none opacity-80" />

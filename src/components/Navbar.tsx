@@ -20,6 +20,14 @@ export function Navbar({ activeSection }: NavbarProps) {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileOpen) setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [mobileOpen]);
+
   return (
     <>
       <header
@@ -30,8 +38,8 @@ export function Navbar({ activeSection }: NavbarProps) {
           Sea&nbsp;Fronk<span style={{ opacity: 0.4 }}>.</span>
         </a>
 
-        {/* Desktop nav - shown on tablet and up */}
-        <nav className="hidden sm:flex items-center gap-6 md:gap-8 text-sm">
+        {/* Desktop nav - shown on desktop only (768px+) */}
+        <nav className="hidden md:flex items-center gap-8 text-sm">
           {nav.map((item) => (
             <a
               key={item.id}
@@ -48,15 +56,15 @@ export function Navbar({ activeSection }: NavbarProps) {
           ))}
         </nav>
 
-        <div className="hidden sm:block">
-          <GlassEffect href="#contact" className="rounded-full px-4 py-2">
+        <div className="hidden md:block">
+          <GlassEffect href="#contact" target="_self" rel="" className="rounded-full px-4 py-2">
             <span className="text-sm" style={{ color: COLORS.TEXT }}>Let's talk</span>
           </GlassEffect>
         </div>
 
-        {/* Mobile hamburger - only below 640px */}
+        {/* Mobile hamburger - visible below md (768px) */}
         <button
-          className="sm:hidden relative w-10 h-10 flex items-center justify-center"
+          className="md:hidden relative w-10 h-10 flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           style={{ zIndex: 110 }}
@@ -82,9 +90,9 @@ export function Navbar({ activeSection }: NavbarProps) {
         </button>
       </header>
 
-      {/* Mobile menu overlay - only below 640px */}
+      {/* Mobile menu overlay */}
       <div
-        className={`sm:hidden fixed inset-0 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
+        className={`md:hidden fixed inset-0 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -94,6 +102,9 @@ export function Navbar({ activeSection }: NavbarProps) {
           backgroundColor: "rgba(2, 2, 2, 0.98)",
           backdropFilter: "blur(30px)",
           WebkitBackdropFilter: "blur(30px)",
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setMobileOpen(false);
         }}
       >
         <nav className="flex flex-col items-center gap-5">
@@ -106,7 +117,7 @@ export function Navbar({ activeSection }: NavbarProps) {
               style={{
                 fontSize: "1.5rem",
                 color: COLORS.TEXT,
-                opacity: mobileOpen ? (activeSection === item.id ? 1 : 0.5) : 0,
+                opacity: mobileOpen ? 1 : 0,
                 fontWeight: activeSection === item.id ? 600 : 400,
                 transform: mobileOpen ? "translateY(0)" : "translateY(12px)",
                 transitionDelay: mobileOpen ? `${80 + i * 40}ms` : "0ms",
@@ -124,7 +135,7 @@ export function Navbar({ activeSection }: NavbarProps) {
               transitionDelay: mobileOpen ? `${80 + nav.length * 40}ms` : "0ms",
             }}
           >
-            <GlassEffect href="#contact" className="rounded-full px-6 py-3">
+            <GlassEffect href="#contact" target="_self" rel="" className="rounded-full px-6 py-3">
               <span className="text-base" style={{ color: COLORS.TEXT }} onClick={() => setMobileOpen(false)}>
                 Let's talk
               </span>

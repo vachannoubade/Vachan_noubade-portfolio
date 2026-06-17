@@ -24,7 +24,7 @@ export function CTASection() {
             </span>
           ))}
         </h2>
-        <GlassEffect href="#contact" className="rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mt-3 sm:mt-4 md:mt-6">
+        <GlassEffect href="#contact" target="_self" rel="" className="rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mt-3 sm:mt-4 md:mt-6">
           <span className="text-[11px] sm:text-xs md:text-sm">Start a project →</span>
         </GlassEffect>
       </div>

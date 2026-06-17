@@ -63,7 +63,7 @@ export const CircularTestimonials = ({
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
   const [containerWidth, setContainerWidth] = useState(1200);
-  const [isTablet, setIsTablet] = useState(false);
+  const [isReduced, setIsReduced] = useState(false);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -76,7 +76,8 @@ export const CircularTestimonials = ({
 
   useEffect(() => {
     const w = window.innerWidth;
-    setIsTablet(w >= 640 && w < 1024);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIsReduced(w < 1024 || prefersReduced);
   }, []);
 
   useEffect(() => {
@@ -131,15 +132,9 @@ export const CircularTestimonials = ({
       <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 md:gap-12">
         {/* Text on left */}
         <div className="flex-1 flex flex-col justify-between order-2 md:order-1 w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              variants={quoteVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
+          {isReduced ? (
+            /* Static rendering on mobile/tablet — no Framer Motion overhead */
+            <div key={activeIndex}>
               <h3
                 className="font-bold mb-0.5 sm:mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl"
                 style={{ color: colorName }}
@@ -152,33 +147,44 @@ export const CircularTestimonials = ({
               >
                 {activeTestimonial.designation}
               </p>
-              {isTablet ? (
+              <p
+                className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
+                style={{ color: colorTestimony }}
+              >
+                {activeTestimonial.quote}
+              </p>
+            </div>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                variants={quoteVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h3
+                  className="font-bold mb-0.5 sm:mb-2 text-sm sm:text-lg md:text-xl lg:text-2xl"
+                  style={{ color: colorName }}
+                >
+                  {activeTestimonial.name}
+                </h3>
+                <p
+                  className="mb-3 sm:mb-5 md:mb-8 text-[11px] sm:text-sm md:text-sm lg:text-base"
+                  style={{ color: colorDesignation }}
+                >
+                  {activeTestimonial.designation}
+                </p>
                 <p
                   className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
                   style={{ color: colorTestimony }}
                 >
                   {activeTestimonial.quote}
                 </p>
-              ) : (
-                <motion.p
-                  className="leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg"
-                  style={{ color: colorTestimony }}
-                >
-                  {activeTestimonial.quote.split(" ").map((word, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ filter: "blur(8px)", opacity: 0, y: 3 }}
-                      animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, ease: "easeInOut", delay: 0.02 * i }}
-                      style={{ display: "inline-block" }}
-                    >
-                      {word}&nbsp;
-                    </motion.span>
-                  ))}
-                </motion.p>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          )}
           <div className="flex gap-3 sm:gap-4 md:gap-6 pt-3 sm:pt-5 md:pt-8">
             <button
               className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center cursor-pointer border-none transition-colors duration-300"
@@ -206,22 +212,33 @@ export const CircularTestimonials = ({
           className="flex-1 order-1 md:order-2 relative w-full h-52 sm:h-64 md:h-[26rem] overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[2rem]"
           ref={imageContainerRef}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="w-full h-full"
-            >
+          {isReduced ? (
+            /* Static image on mobile/tablet — no Framer Motion overhead */
+            <div key={activeIndex} className="w-full h-full">
               <img
                 src={activeTestimonial.src}
                 alt={activeTestimonial.name}
                 className="w-full h-full object-cover rounded-xl sm:rounded-2xl md:rounded-[2rem]"
               />
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="w-full h-full"
+              >
+                <img
+                  src={activeTestimonial.src}
+                  alt={activeTestimonial.name}
+                  className="w-full h-full object-cover rounded-xl sm:rounded-2xl md:rounded-[2rem]"
+                />
+              </motion.div>
+            </AnimatePresence>
+          )}
         </div>
       </div>
     </div>

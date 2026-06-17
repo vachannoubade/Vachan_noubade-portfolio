@@ -196,13 +196,14 @@ export function PixelPerfectAbout({
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [themeColors, setThemeColors] = useState<string[]>([]);
-  const [isTablet, setIsTablet] = useState(false);
+  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
 
     const w = window.innerWidth;
-    setIsTablet(w >= 640 && w < 1024);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIsReduced(w < 1024 || prefersReduced);
 
     const div = document.createElement("div");
     document.body.appendChild(div);
@@ -237,26 +238,27 @@ export function PixelPerfectAbout({
         }
         @media (max-width: 640px) {
           .about-glass-text {
+            animation: none !important;
             -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.15);
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
           }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
           .about-glass-text {
-            animation: none;
+            animation: none !important;
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
             filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
           }
         }
       `}</style>
 
-      {/* Pixel canvas background */}
+      {/* Pixel canvas background — skipped on mobile/tablet for performance */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {themeColors.length > 0 && (
+        {themeColors.length > 0 && !isReduced && (
           <PixelCanvas
             colors={themeColors}
-            gap={isTablet ? 12 : 6}
-            speed={isTablet ? 15 : 30}
+            gap={6}
+            speed={30}
           />
         )}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--background)_100%)] pointer-events-none opacity-80" />

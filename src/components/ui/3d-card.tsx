@@ -25,15 +25,16 @@ export const CardContainer = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
+  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
     const w = window.innerWidth;
-    setIsTablet(w >= 640 && w < 1024);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIsReduced(w < 1024 || prefersReduced);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || isTablet) return;
+    if (!containerRef.current || isReduced) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) / 25;

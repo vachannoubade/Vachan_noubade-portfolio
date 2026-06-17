@@ -32,6 +32,11 @@ export function useScrollAnimation(containerRef: React.RefObject<HTMLDivElement 
   const initAnimations = useCallback(async () => {
     if (!containerRef.current) return;
 
+    // Skip all GSAP animations on mobile/tablet — they cause scroll jank
+    const w = window.innerWidth;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (w < 1024 || prefersReduced) return;
+
     const gsapMod = await import("gsap");
     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     const gsap = gsapMod.gsap;

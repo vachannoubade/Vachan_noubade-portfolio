@@ -213,24 +213,23 @@
 }
 @utility animate-aurora { animation: aurora 20s ease-in-out infinite; }
 
-/* Mobile: disable heavy animations */
+/* Mobile: disable heavy animations that cause lag */
 @media (max-width: 640px) {
   .hero-float {
     animation: none;
   }
   .pulse-glow {
-    animation-duration: 8s;
+    animation: none;
   }
   .shimmer-gradient {
-    animation-duration: 30s;
+    animation: none;
   }
-  .pill:hover {
-    transform: none;
-    box-shadow: none;
+  .animate-aurora {
+    animation: none;
   }
 }
 
-/* Tablet: disable ALL heavy animations for smooth scrolling */
+/* Tablet: disable heavy animations for smooth scrolling */
 @media (min-width: 641px) and (max-width: 1024px) {
   .hero-float {
     animation: none;
@@ -239,19 +238,10 @@
     animation: none;
   }
   .shimmer-gradient {
-    animation-duration: 40s;
-  }
-  .pill:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  /* Disable aurora animation on tablet */
-  .animate-aurora {
     animation: none;
   }
-  /* Reduce noise overlay opacity */
-  .noise-overlay {
-    opacity: 0.02;
+  .animate-aurora {
+    animation: none;
   }
 }
 

@@ -9,8 +9,11 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     if (!container) return;
 
     const w = window.innerWidth;
-    const isSmall = w < 640;
-    const isTablet = w >= 640 && w < 1024;
+    const isMobileOrTablet = w < 1024;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Skip WebGL entirely on mobile/tablet — it's the #1 GPU hog
+    if (isMobileOrTablet || prefersReduced) return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -20,22 +23,7 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    const fragmentShader = (isSmall || isTablet) ? `
-      precision highp float;
-      uniform float iTime;
-      uniform vec2 iResolution;
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / iResolution.xy;
-        float t = iTime * 0.15;
-
-        vec3 col = vec3(0.0);
-        col += 0.06 * vec3(0.2, 0.5, 0.8) * (0.5 + 0.5 * sin(t + uv.x * 3.0 + uv.y * 2.0));
-        col += 0.04 * vec3(0.4, 0.2, 0.7) * (0.5 + 0.5 * cos(t * 0.7 + uv.y * 4.0));
-
-        gl_FragColor = vec4(col, 1.0);
-      }
-    ` : `
+    const fragmentShader = `
       uniform float iTime;
       uniform vec2 iResolution;
 

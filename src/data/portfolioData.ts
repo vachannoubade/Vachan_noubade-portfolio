@@ -1,6 +1,6 @@
 import type { PortfolioData } from "@/types";
 import mpImg from "@/assets/mp.png";
-import ssvVideo from "@/assets/ssv video.mp4";
+import fsvVideo from "@/assets/fsv.mp4";
 import quicksortImg from "@/assets/quick photo.png";
 import g3 from "@/assets/instapage.png";
 import g4 from "@/assets/yt page.png";
@@ -41,7 +41,7 @@ export const portfolioData: PortfolioData = {
         category: "Healthcare · Website",
         year: "2025",
         type: "video",
-        mediaSrc: ssvVideo,
+        mediaSrc: fsvVideo,
         alt: "SSV Homeopathy Hospital Website",
       },
       {

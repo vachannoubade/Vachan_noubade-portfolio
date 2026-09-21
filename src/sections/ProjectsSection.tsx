@@ -29,7 +29,7 @@ export function ProjectsSection() {
           <div className="flex w-max animate-[auto-scroll_15s_linear_infinite] sm:animate-none sm:w-full sm:grid sm:grid-cols-2 gap-3 sm:gap-5 md:gap-8 pb-8 sm:pb-0 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
             {[...projects.items, ...projects.items].map((project, index) => (
               project.type === "link" ? (
-                <div key={`${project.id}-${index}`} className={`flex flex-col justify-between p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-foreground/5 gap-6 w-[80vw] max-w-[350px] sm:w-auto flex-none ${project.className ?? ""} ${index >= projects.items.length ? 'sm:hidden' : ''}`}>
+                <div key={`${project.id}-${index}`} className={`flex flex-col justify-between p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-foreground/5 gap-6 w-[80vw] max-w-[350px] sm:max-w-none sm:w-auto flex-none ${project.className ?? ""} ${index >= projects.items.length ? 'sm:hidden' : ''}`}>
                   <div>
                     <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-foreground/50 mb-3">
                       {project.category} · {project.year}
@@ -75,7 +75,7 @@ export function ProjectsSection() {
                   </div>
                 </div>
               ) : (
-              <div key={`${project.id}-${index}`} className={`${index < projects.items.length ? 'project-card ' : ''}w-[80vw] max-w-[350px] sm:w-auto flex-none ${project.className ?? ""} ${index >= projects.items.length ? 'sm:hidden' : ''}`}>
+              <div key={`${project.id}-${index}`} className={`${index < projects.items.length ? 'project-card ' : ''}w-[80vw] max-w-[350px] sm:max-w-none sm:w-auto flex-none ${project.className ?? ""} ${index >= projects.items.length ? 'sm:hidden' : ''}`}>
                 <CardContainer className="inter-var w-full">
                   <CardBody className="relative group/card bg-foreground/5 rounded-xl sm:rounded-2xl p-0 border-transparent w-full h-auto">
                     <CardItem translateZ="100" className="w-full">

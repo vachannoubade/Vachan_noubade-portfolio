@@ -27,7 +27,7 @@ export function TeamSection() {
             {[...team.members, ...team.members].map((member, index) => (
               <div 
                 key={`${member.id}-${index}`} 
-                className={`${index < team.members.length ? 'reveal ' : ''}flex-none w-[75vw] max-w-[300px] sm:w-auto flex flex-col items-center text-center group ${index >= team.members.length ? 'sm:hidden' : ''}`}
+                className={`${index < team.members.length ? 'reveal ' : ''}flex-none w-[75vw] max-w-[300px] sm:max-w-none sm:w-auto flex flex-col items-center text-center group ${index >= team.members.length ? 'sm:hidden' : ''}`}
               >
                 <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 bg-foreground/5 flex items-center justify-center border border-border shadow-xl transition-transform duration-500 group-hover:scale-[1.03] group-hover:shadow-2xl">
                   {member.photoSrc ? (

@@ -59,6 +59,8 @@ export function HeroSection() {
                   <img
                     src={heroImageSrc}
                     alt="Vachan Noubade portrait"
+                    fetchPriority="high"
+                    decoding="async"
                     className="w-full h-full object-cover object-[50%_20%]"
                   />
                 </div>

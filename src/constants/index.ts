@@ -1,5 +1,6 @@
 export const SECTION_IDS = {
   TOP: "top",
+  TEAM: "team",
   ABOUT: "about",
   WORK: "work",
   GALLERY: "gallery",
@@ -8,8 +9,9 @@ export const SECTION_IDS = {
 
 export const SECTION_IDS_ARRAY = [
   SECTION_IDS.TOP,
-  SECTION_IDS.ABOUT,
+  SECTION_IDS.TEAM,
   SECTION_IDS.WORK,
+  SECTION_IDS.ABOUT,
   SECTION_IDS.GALLERY,
   SECTION_IDS.CONTACT,
 ] as const;
@@ -22,6 +24,7 @@ export const COLORS = {
 } as const;
 
 export const SECTION_LABELS = {
+  TEAM: "— Team —",
   ABOUT: "— About —",
   SELECTED_WORK: "Selected Work",
   STUDIO_FEED: "Studio Feed",

@@ -200,6 +200,8 @@ export const CircularTestimonials = ({
               <img
                 src={activeTestimonial.src}
                 alt={activeTestimonial.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover rounded-xl sm:rounded-2xl md:rounded-[2rem]"
               />
             </motion.div>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/sections/HeroSection";
+import { TeamSection } from "@/sections/TeamSection";
 import { AboutSection } from "@/sections/AboutSection";
 import { ProjectsSection } from "@/sections/ProjectsSection";
 import { GallerySection } from "@/sections/GallerySection";
@@ -37,8 +38,9 @@ function Index() {
     >
       <Navbar activeSection={activeSection} />
       <HeroSection />
-      <AboutSection />
+      <TeamSection />
       <ProjectsSection />
+      <AboutSection />
       <GallerySection />
       <ContactSection />
       <CTASection />

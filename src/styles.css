@@ -206,6 +206,11 @@
   animation: shimmer-bg 18s ease infinite;
 }
 
+@keyframes auto-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); }
+}
+
 @keyframes aurora {
   0% { background-position: 50% 50%, 50% 50%; }
   50% { background-position: 50% 100%, 50% 50%; }
@@ -222,4 +227,18 @@
   --blue-300: #93c5fd;
   --violet-200: #ddd6fe;
   --blue-400: #60a5fa;
+}
+
+/* Optimize GSAP animation targets for smoother scrolling */
+.hero-eyebrow,
+.hero-title .word,
+.hero-sub,
+.hero-pill,
+.hero-image,
+.hero-meta,
+.about-line,
+.reveal,
+.project-card,
+.cta-word {
+  will-change: transform, opacity;
 }

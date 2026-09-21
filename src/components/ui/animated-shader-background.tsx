@@ -102,12 +102,27 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     scene.add(mesh);
 
     let frameId: number;
+    let isVisible = false;
+
     const animate = () => {
+      if (!isVisible) return;
       material.uniforms.iTime.value += 0.016;
       renderer.render(scene, camera);
       frameId = requestAnimationFrame(animate);
     };
-    animate();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          animate();
+        } else {
+          cancelAnimationFrame(frameId);
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    observer.observe(container);
 
     const handleResize = () => {
       const rw = container.clientWidth;
@@ -118,6 +133,7 @@ const AnimatedShaderBackground: React.FC<{ className?: string }> = ({ className 
     window.addEventListener('resize', handleResize);
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(frameId);
       window.removeEventListener('resize', handleResize);
       container.removeChild(renderer.domElement);

@@ -9,9 +9,11 @@ export interface Project {
   readonly subtitle?: string;
   readonly category: string;
   readonly year: string;
-  readonly type: "video" | "image";
-  readonly mediaSrc: string;
-  readonly alt: string;
+  readonly type: "video" | "image" | "link";
+  readonly url?: string;
+  readonly hoverImage?: string;
+  readonly mediaSrc?: string;
+  readonly alt?: string;
   readonly className?: string;
 }
 
@@ -20,6 +22,14 @@ export interface Testimonial {
   readonly name: string;
   readonly designation: string;
   readonly src: string;
+}
+
+export interface TeamMember {
+  readonly id: string;
+  readonly name: string;
+  readonly role: string;
+  readonly description: string;
+  readonly photoSrc?: string;
 }
 
 export interface SocialLink {
@@ -59,6 +69,10 @@ export interface PortfolioData {
     readonly word2: string;
     readonly description: string;
   };
+  readonly team: {
+    readonly heading: string;
+    readonly members: readonly TeamMember[];
+  };
   readonly projects: {
     readonly sectionLabel: string;
     readonly heading: string;
@@ -74,6 +88,8 @@ export interface PortfolioData {
   readonly contact: ContactData;
   readonly cta: {
     readonly words: readonly { text: string; italic?: boolean }[];
+    readonly hoverImage?: string;
+    readonly hoverCaption?: string;
   };
   readonly footer: FooterData;
   readonly nav: readonly NavItem[];

@@ -8,6 +8,9 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useState, useCallback } from "react";
+import Lenis from "lenis";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 import appCss from "../styles.css?url";
 import "@fontsource/open-sauce-sans/400.css";
@@ -109,6 +112,19 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [entered, setEntered] = useState(false);
   const onComplete = useCallback(() => setEntered(true), []);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis({
+      autoRaf: true,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

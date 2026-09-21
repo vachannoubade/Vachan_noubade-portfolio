@@ -4,6 +4,9 @@ import fsvVideo from "@/assets/fsv.mp4";
 import quicksortImg from "@/assets/quick photo.png";
 import g3 from "@/assets/instapage.png";
 import g4 from "@/assets/yt page.png";
+import spagreeImg from "@/assets/spagree.jpeg";
+import mananImg from "@/assets/manan.jpeg";
+import adiImg from "@/assets/adi.jpeg";
 
 export const portfolioData: PortfolioData = {
   meta: {
@@ -19,7 +22,7 @@ export const portfolioData: PortfolioData = {
     name: "Vachan",
     nameItalic: "Noubade",
     subtitle:
-      'Independent designer & developer crafting modern, high-performance web experiences under the studio name <em className="font-display">Sea Fronk</em>.',
+      'I am a passionate designer, developer, and the founder of <em className="font-display">Sea Fronk</em>, where we build premium digital experiences that elevate brands.',
     pills: ["Content Creator", "UI / UX Designer", "Full-Stack Developer"],
     location: "India · Remote",
   },
@@ -31,6 +34,33 @@ export const portfolioData: PortfolioData = {
       "I craft modern, high-performance web experiences that feel intuitive, look premium and convert like products.",
   },
 
+  team: {
+    heading: "The core team.",
+    members: [
+      {
+        id: "vachan",
+        name: "Vachan Noubade",
+        role: "Founder & Full-Stack Developer",
+        description: "Visionary designer and developer building premium web experiences.",
+        photoSrc: mpImg,
+      },
+      {
+        id: "manan",
+        name: "Manan Patel",
+        role: "Core Member",
+        description: "Strategic mind driving operations and growth for our partners.",
+        photoSrc: mananImg,
+      },
+      {
+        id: "adi",
+        name: "Aditya Sigh Tomar",
+        role: "Creative Lead",
+        description: "A brilliant mind currently brewing fresh ideas in the background.",
+        photoSrc: adiImg,
+      },
+    ],
+  },
+
   projects: {
     sectionLabel: "Selected Work",
     heading: "Recent projects.",
@@ -39,21 +69,18 @@ export const portfolioData: PortfolioData = {
         id: "ssv",
         title: "SSV Homeopathy Hospital Website",
         category: "Healthcare · Website",
-        year: "2025",
-        type: "video",
-        mediaSrc: fsvVideo,
-        alt: "SSV Homeopathy Hospital Website",
+        year: "2026",
+        type: "link",
+        url: "https://ssv-homeopathy.vercel.app/",
       },
       {
-        id: "quicksort",
-        title: "The Quick Sort",
-        subtitle: "Mr's-Sarthi",
-        category: "Editorial · Brand",
-        year: "2025",
-        type: "image",
-        mediaSrc: quicksortImg,
-        alt: "The Quick Sort — Mr's-Sarthi",
-        className: "md:mt-16",
+        id: "sudama",
+        title: "Sudama pohe bidar",
+        category: "Website",
+        year: "2026",
+        type: "link",
+        url: "https://sudamapohebidar.vercel.app/",
+        hoverImage: spagreeImg,
       },
     ],
   },
@@ -118,8 +145,9 @@ export const portfolioData: PortfolioData = {
 
   nav: [
     { id: "top", label: "SeaMen" },
-    { id: "about", label: "About" },
+    { id: "team", label: "Team" },
     { id: "work", label: "Work" },
+    { id: "about", label: "About" },
     { id: "gallery", label: "Gallery" },
     { id: "contact", label: "Contact" },
   ],

@@ -1,9 +1,29 @@
+import { useEffect, useRef } from "react";
 import { SECTION_IDS, SECTION_LABELS } from "@/constants";
 import { portfolioData } from "@/data/portfolioData";
 import { User } from "lucide-react";
 
 export function TeamSection() {
   const { team } = portfolioData;
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleAutoScroll = () => {
+      if (window.innerWidth >= 640 || !scrollRef.current) return;
+      
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      // If we've reached the end, scroll back to the start
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Scroll by one card width (85vw)
+        scrollRef.current.scrollBy({ left: clientWidth * 0.85, behavior: 'smooth' });
+      }
+    };
+
+    const interval = setInterval(handleAutoScroll, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
@@ -23,11 +43,14 @@ export function TeamSection() {
         </div>
 
         <div className="overflow-hidden sm:overflow-visible w-full -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex w-max animate-[auto-scroll_12s_linear_infinite] sm:animate-none sm:w-full sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 pb-8 sm:pb-0 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
-            {[...team.members, ...team.members].map((member, index) => (
+          <div 
+            ref={scrollRef}
+            className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 pb-8 sm:pb-0"
+          >
+            {team.members.map((member) => (
               <div 
-                key={`${member.id}-${index}`} 
-                className={`${index < team.members.length ? 'reveal ' : ''}flex-none w-[75vw] max-w-[300px] sm:max-w-none sm:w-auto flex flex-col items-center text-center group ${index >= team.members.length ? 'sm:hidden' : ''}`}
+                key={member.id} 
+                className="reveal flex-none w-[85vw] max-w-[320px] snap-center sm:max-w-none sm:w-auto flex flex-col items-center text-center group"
               >
                 <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden mb-6 bg-foreground/5 flex items-center justify-center border border-border shadow-xl transition-transform duration-500 group-hover:scale-[1.03] group-hover:shadow-2xl">
                   {member.photoSrc ? (
